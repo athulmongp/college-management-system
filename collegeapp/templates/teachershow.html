@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+   
+        body{
+            background-image: url("{% static 'img/pic2.jpeg' %}");
+            background-size: cover;
+        }
+        h1{
+           
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-weight: bold;
+            padding-top: 15px;
+        }
+  </style>
+</head>
+<body style="background-color: black;">
+    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: black;">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#" style="width: 30%;">
+                <h1><img src="{% static 'img/lg1.gif' %}" alt="" style="max-width: 6em; max-height: 3.2em;"></h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link  mx-5 text-white" href="{% url 'adminhomepage' %}" ><B>HOME</B></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-5  text-white" href="{% url 'coursepage' %}">ADD COURSE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-5  text-white" href="{% url 'studentpage' %}">ADD STUDENT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-5  text-white" href="{% url 'sdetails' %}">STUDENTS DETAILS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-5  " href="{% url 'teacherdetail' %}" style="color: rgb(117, 202, 231);">TECHERS DETAILS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-5  text-white" href="{% url 'logout' %}">LOGOUT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   <center> <h1>TEACHERS DETAILS</h1></center>
+
+{% for t in teacher %}
+  <div class="row" >
+    
+        <div class="col">
+       
+            <center>
+           <div class="container" style="background-color: rgb(255, 255, 255,0.7);  margin-top: 40px; padding: 10px;">
+            {% if t.img %}
+            <img src="{{ t.img.url }}" class="img-thumbnail" width="300px" height="300px" style="margin-top: 20px; background-color: black;">
+           
+            {% else %}
+            <img src="{% static 'img/person-circle.svg' %}"class="img-thumbnail" width="300px" height="300px" style="margin-top: 20px;">
+            {% endif %}
+            <h2 style="color: white; margin-left: 20px;text-shadow: 2px 2px 4px #000000;" ><a href="{% url 'tcard' t.id %}" style="color: white;">NAME:{{ t.user.first_name }} {{ t.user.last_name }}</a></h2>
+            <h4 style="color: white;margin-left: 2px;text-shadow: 2px 2px 4px #000000;">COURSE:{{ t.Course.Course_Name }}</h4>
+           </div>
+            
+
+
+    
+            </center>
+        </div>
+       
+    
+  </div>
+{% endfor %}  
+    
+</body>
+</html>
